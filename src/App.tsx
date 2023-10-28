@@ -10,8 +10,9 @@ function App() {
   const [newIdea, setNewIdea] = useState("")
   const [includeRandom, setIncludeRandom] = useState(true)
 
+
   const ideas = useQuery(api.myFunctions.listIdeas)
-  const saveIdea = useMutation(api.myFunctions.saveIdea)
+  const saveCurriculum = useMutation(api.myFunctions.saveCurriculum)
   const generateIdea = useAction(api.myFunctions.fetchRandomIdea)
 
   return (
@@ -38,7 +39,7 @@ function App() {
                 : "You must enter an idea first"
             }
             onClick={async () => {
-              await saveIdea({ idea: newIdea.trim(), random: false })
+              await saveCurriculum({ description: newIdea.trim()})
               setNewIdea("")
             }}
             className="min-w-fit"

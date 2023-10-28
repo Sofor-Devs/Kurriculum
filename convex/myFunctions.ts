@@ -19,11 +19,10 @@ export const listIdeas = query({
 })
 
 // You can write data to the database via a mutation function:
-export const saveIdea = mutation({
+export const saveCurriculum = mutation({
   // Validators for arguments.
   args: {
-    idea: v.string(),
-    random: v.boolean(),
+    description: v.string()
   },
 
   // Mutation function implementation.
@@ -53,9 +52,8 @@ export const fetchRandomIdea = action({
     const idea = await response.text()
 
     // Write or query data by running Convex mutations/queries from within an action
-    await ctx.runMutation(api.myFunctions.saveIdea, {
-      idea: idea.trim(),
-      random: true,
+    await ctx.runMutation(api.myFunctions.saveCurriculum, {
+      description: idea.trim(),
     })
 
     // Optionally, return a value from your action

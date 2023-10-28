@@ -14,3 +14,8 @@ playground-temp
 temp
 TODOs.md
 .eslintcache
+
+.env.local
+src\components\Keys\keys.tsx
+
+src/components/Keys/keys.tsx

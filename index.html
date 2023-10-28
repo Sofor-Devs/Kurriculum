@@ -22,9 +22,26 @@
     </header>
     <form>
       <!-- <input type="text" class="todo-input" /> -->
-      <button class="todo-button" type="submit">
+      <button class="todo-button"  onclick="openForm()" type="submit">
         <i class="fas fa-plus-square"></i>
       </button>
+      <!-- The form -->
+      <div class="form-popup" id="myForm">
+        <form action="/action_page.php" class="form-container">
+          <h1>Description:</h1>
+
+          <label for="Timeline"><b>Timeline</b></label>
+          <input type="date" placeholder="Timeline" name="Timeline" required>
+          <br>
+
+          <label for="Psum"><b>Project Summary</b></label>
+          <input type="text" placeholder="Project Summary" name="Psum" required>
+          <br>
+
+          <button type="submit" class="btn">Add</button>
+          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+      </div> 
       <div class="select">
         <select name="todos" class="filter-todo">
           <option value="all">All</option>
@@ -35,7 +52,8 @@
     </form>
     <div class="todo-container">
       <ul class="todo-list"></ul>
-    </div>
+    </div> 
+   
 
     <script src="./app.js"></script>
   </body>

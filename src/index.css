@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(120deg, hsla(180, 47%, 31%, 1) 0%, hsla(0, 2%, 84%, 1) 100%);
+  color: hsla(0, 0%, 90%, 1);
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  font-size: 2rem;
+  margin: 2rem 0;
+}
+
+.inputGroup {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.input, .button {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  background: hsla(0, 0%, 90%, 1);
+}
+
+.button {
+  color: hsla(180, 47%, 31%, 1);
+  background: hsla(0, 0%, 90%, 1);
+  border-radius: 22%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  border-radius: 42%;
+  background: hsla(152, 100%, 76%, 1);
+  color: hsla(0, 0%, 90%, 1);
+}
+
+.curriculum {
+  margin-top: 1rem;
+}
+
+.youtubeKeywords {
+  margin-top: 1rem;
+}
+
+.error {
+  color: red;
+  margin-top: 1rem;
+}

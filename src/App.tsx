@@ -16,7 +16,7 @@ function App() {
   return (
     <main className="container max-w-2xl flex flex-col gap-8">
       <h1 className="text-3xl font-extrabold mt-8 text-center">
-        Curriculum Generator
+      Kurriculum
       </h1>
 
       <Button onClick={openModal}>Open Curriculum Generator</Button>

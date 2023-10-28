@@ -74,6 +74,7 @@ const CurriculumGenerator = () => {
       data: {
         model: 'togethercomputer/llama-2-13b-chat',
         prompt: prompt,
+        max_tokens: 8196,
         stop: '.',
         temperature: 0.7,
         top_p: 0.7,

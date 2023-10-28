@@ -36,15 +36,22 @@ form button {
 }
 form button {
   color:hsla(180, 47%, 31%, 1);
-  background:hsla(0, 0%, 90%, 1);
+  background:hsla(0, 0%, 90%, 0);
   border-radius: 22%;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 form button:hover {
-  border-radius: 42%;
-  background: hsla(152, 100%, 76%, 1);
+  border-radius: 24px;
+  background: rgba(98, 255, 182, 0.548);
   color: hsla(0, 0%, 90%, 1);
+}
+.todo-button{
+  position: fixed;
+  bottom: 60px;
+  margin-left: 80%;
+  z-index: 99;
+
 }
 
 .todo-container {

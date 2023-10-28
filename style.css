@@ -1,0 +1,150 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+/* CSS HSL */
+/* --jet: hsla(330, 2%, 18%, 1);
+--aquamarine: hsla(152, 100%, 76%, 1);
+--myrtle-green: hsla(180, 47%, 31%, 1);
+--platinum: hsla(0, 0%, 90%, 1);
+--timberwolf: hsla(0, 2%, 84%, 1); */
+}
+body {
+  background-image: linear-gradient(120deg,hsla(180, 47%, 31%, 1) 0%, hsla(0, 2%, 84%, 1) 100%);
+  /* background-image: radial-gradient(120deg,hsla(180, 47%, 31%, 1) 0%, hsla(0, 0%, 90%, 1) 100%); */
+  color: hsla(0, 0%, 90%, 1);
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+}
+header {
+  font-size: 2rem;
+}
+
+header,
+form {
+  min-height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+form input,
+form button {
+  padding: 0.5rem;
+  font-size: 2rem;
+  border: none;
+  background: hsla(0, 0%, 90%, 1);
+}
+form button {
+  color:hsla(180, 47%, 31%, 1);
+  background:hsla(0, 0%, 90%, 1);
+  border-radius: 22%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+form button:hover {
+  border-radius: 42%;
+  background: hsla(152, 100%, 76%, 1);
+  color: hsla(0, 0%, 90%, 1);
+}
+
+.todo-container {
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo-list {
+  min-width: 30%;
+  list-style: none;
+}
+
+.todo {
+  margin: 0.5rem;
+  background:hsla(0, 0%, 90%, 1);
+  font-size: 1.5rem;
+  color:hsla(330, 2%, 18%, 1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 1s ease;
+}
+.filter-todo {
+  padding: 1rem;
+}
+.todo li {
+  flex: 1;
+}
+
+.trash-btn,
+.complete-btn {
+  background: hsla(180, 47%, 31%, 1);
+  color: hsla(0, 0%, 90%, 1);
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.complete-btn {
+  background: rgb(11, 212, 162);
+}
+.todo-item {
+  padding: 0rem 0.5rem;
+}
+
+.fa-trash,
+.fa-check {
+  pointer-events: none;
+}
+
+.fall {
+  transform: translateY(10rem) rotateZ(20deg);
+  opacity: 0;
+}
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+/*CUSTOM SELECTOR */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background-image: none;
+}
+
+/* Custom Select */
+.select {
+  margin: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+select {
+  color: hsla(180, 47%, 31%, 1);
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  width: 12rem;
+}
+/* Arrow */
+.select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  background:hsla(180, 47%, 31%, 1);
+  cursor: pointer;
+  pointer-events: none;
+}
+/* Transition */
+/*
+.select:hover::after {
+  transform: scale(1.5);
+}
+*/

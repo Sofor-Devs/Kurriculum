@@ -49,3 +49,10 @@ footer {
   font-size: 0.8em;
   color: #888;
 }
+.app {
+  display: flex;
+}
+
+.main {
+  flex-grow: 1;
+}

@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Modal from './components/Modal';
 import CurriculumGenerator from './models/CurriculumGenerator';
 import { useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
+import { Button } from "../src/components/ui/button";
+import Sidebar from './components/navigate/Sidebar';  // Import Sidebar component
+import { BrowserRouter as Router } from 'react-router-dom';
 import './app.css';
-import Navigation from './components/navigate/Navigate';
-import Home from './pages/Home/home'; // Create Home, About, Services, and Contact components accordingly
-
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,57 +14,36 @@ function App() {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-  const Bar = () => {
-    return (
-      <Router>
-        <div className="app">
-          <Navigation />
-          <div className="content">
-            <Routes>
-              <Route path="/" element={<Home/>} />
-              {/* <Route path="/about" Component={About} />
-              <Route path="/services" Component={Services} />
-              <Route path="/contact" Component={Contact} /> */}
-            </Routes>
-          </div>
-        </div>
-      </Router>
-    );
-  };
+
   return (
     <Router>
-      <div>
-        <switch>
-          {/* Define a route for the home page */}
-          <Route path="/"  Component={Home} />
-          {/* Define other routes for additional pages here */}
-        </switch>
+      <div className="app">
+        <Sidebar />
+        <main className="container max-w-2xl flex flex-col gap-8">
+          <h1 className="text-3xl font-extrabold mt-8 text-center">
+            Curriculum Generator
+          </h1>
+
+          <Button onClick={openModal}>Open Curriculum Generator</Button>
+
+          <Modal isOpen={isModalOpen} onClose={closeModal}>
+            <CurriculumGenerator closeModal={closeModal} />
+          </Modal>
+
+          <ul>
+            {ideas?.map((document, i) => (
+              <li key={i}>
+                {document.description}
+              </li>
+            ))}
+          </ul>
+          
+          <footer className="text-center text-xs mb-5 mt-10 w-full">
+            {/* Footer content */}
+          </footer>
+        </main>
       </div>
     </Router>
-  );
-
-  return (
-    <div id="root">
-      <h1>Curriculum Generator</h1>
-
-      <button onClick={openModal}>Open Curriculum Generator</button>
-
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <CurriculumGenerator closeModal={closeModal} />
-      </Modal>
-
-      <ul>
-        {ideas?.map((document, i) => (
-          <li key={i}>
-            {document.description}
-          </li>
-        ))}
-      </ul>
-      
-      <footer>
-        {/* Footer content */}
-      </footer>
-    </div>
   );
 }
 

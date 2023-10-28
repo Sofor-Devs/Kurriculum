@@ -1,24 +1,20 @@
 .sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 200px;
-    height: 100%;
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  li {
-    margin: 10px 0;
-  }
-  
-  a {
-    text-decoration: none;
-    color: #fff;
-  }
+  width: 200px;
+  height: 100vh;
+  padding: 1em;
+  background-color: #f4f4f4;
+}
+
+.sidebar h2 {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 0.5em;
+}

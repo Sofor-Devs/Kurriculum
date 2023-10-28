@@ -74,8 +74,7 @@ const CurriculumGenerator = () => {
       data: {
         model: 'togethercomputer/llama-2-13b-chat',
         prompt: prompt,
-        max_tokens: 8196,
-        stop: '.',
+        max_tokens: 2635,
         temperature: 0.7,
         top_p: 0.7,
         top_k: 50,
@@ -86,6 +85,7 @@ const CurriculumGenerator = () => {
     try {
       const response = await axios.request(options);
       const generatedText: string = response.data.output.choices[0].text;
+      console.log(generatedText);
       setCurriculum(generatedText);
 
       const keywordsLine = generatedText.split('\n').find(line => line.startsWith('Keywords for YouTube:')) || '';

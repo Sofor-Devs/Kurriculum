@@ -5,6 +5,8 @@ import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { APIKeys } from "../components/Keys/keys";
 
+import "./loading.css"; // Create a loading.css file with your loading bar style
+
 interface OptionType {
   value: string;
   label: string;
@@ -20,6 +22,8 @@ const CurriculumGenerator = () => {
   const [curriculum, setCurriculum] = useState("");
   const [keywords, setKeywords] = useState(["", "", "", "", ""]); //THIS MIGHT NEED SOME CHANGE
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // State for loading indicator
+
 
   const classDaysOptions = [
     { value: "Monday", label: "Monday" },
@@ -47,6 +51,7 @@ const CurriculumGenerator = () => {
   const saveCurriculum = useMutation(api.myFunctions.saveCurriculum);
 
   const generateCurriculum = async () => {
+    setIsLoading(true); // Start loading
     const prompt = `
     [INST]
       Generate a detailed curriculum plan based on the following details:
@@ -122,6 +127,9 @@ const CurriculumGenerator = () => {
       await saveCurriculum({ description: generatedText });
     } catch (error) {
       setError("Failed to generate curriculum");
+    }finally{
+      setIsLoading(false); // Set loading indicator to false
+
       console.error(error);
     }
   };
@@ -129,6 +137,8 @@ const CurriculumGenerator = () => {
   return (
     <div>
       <h2>Curriculum Generator</h2>
+      {/* Add a loading bar style or spinner in loading.css */}
+      {isLoading && <div className="loading-bar" />}
       <div>
         <label>
           Project Name:

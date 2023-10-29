@@ -37,9 +37,7 @@ function App() {
                   </h1>
 
                   <Button onClick={openModal}>
-                    <a href="./pages/Curriculum/curriculum">
                       Open Curriculum Generator
-                    </a>
                   </Button>
 
                   <Modal isOpen={isModalOpen} onClose={closeModal}>

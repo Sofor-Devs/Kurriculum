@@ -84,10 +84,15 @@ nav ul a:nth-child(1) li:after {
 	line-height: 80px;
 }
 nav ul a:nth-child(2) li:after { 
-	content: "About";
+	content: "Add";
 	line-height: 80px;
 }
 nav ul a:nth-child(3) li:after { 
+	content: "About";
+	line-height: 80px;
+}
+
+nav ul a:nth-child(4) li:after { 
 	content: "Contact";
 	line-height: 80px;
 }

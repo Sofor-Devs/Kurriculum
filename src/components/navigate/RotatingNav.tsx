@@ -24,6 +24,13 @@ const RotatingNav: React.FC = () => {
           </li>
         </Link>
 
+        <Link className="link" to="/">
+          <li className={rotated ? 'rotated' : ''}>
+            <div className="main">
+            </div>
+          </li>
+        </Link>
+
         <Link className="link" to="/about">
           <li className={rotated ? 'rotated' : ''}>
             <div className="work-icon">

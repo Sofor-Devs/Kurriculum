@@ -45,6 +45,15 @@ const RotatingNav: React.FC = () => {
           </li>
         </Link>
 
+        <Link className="link" to="/about">
+          <li className={rotated ? 'rotated' : ''}>
+            <div className="about">
+              <div className="vertical"></div>
+              <div className='circle'></div>
+            </div>
+          </li>
+        </Link>
+
         <Link className="link" to="/contact">
           <li className={rotated ? 'rotated' : ''}>
             <div className="mail-icon">

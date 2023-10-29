@@ -91,8 +91,12 @@ nav ul a:nth-child(3) li:after {
 	content: "History";
 	line-height: 80px;
 }
-
 nav ul a:nth-child(4) li:after { 
+	content: "About";
+	line-height: 80px;
+}
+
+nav ul a:nth-child(5) li:after { 
 	content: "Contact";
 	line-height: 80px;
 }
@@ -235,7 +239,15 @@ nav ul li > div {
 	left: 3px;
 	width: 14px;
 }
-
+.circle {
+	position: absolute;
+	top: 60px;
+	left: 30px;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: aliceblue;
+}
 .lines:nth-child(2) {
 	position: absolute;
 	top: 40px;

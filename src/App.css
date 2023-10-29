@@ -10,9 +10,9 @@
 }
 
 button {
-  background-color: #4CAF50; /* Green */
+  background-color: hsla(180, 47%, 31%, 1); 
   border: none;
-  color: white;
+  color: hsla(0, 0%, 90%, 1);
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -25,8 +25,8 @@ button {
 }
 
 button:hover {
-  background-color: white;
-  color: black;
+  background-color: hsla(330, 2%, 18%, 1);
+  color: hsla(152, 100%, 76%, 1);
 }
 
 h1 {
@@ -48,11 +48,4 @@ footer {
   margin-top: 20px;
   font-size: 0.8em;
   color: #888;
-}
-.app {
-  display: flex;
-}
-
-.main {
-  flex-grow: 1;
 }

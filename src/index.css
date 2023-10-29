@@ -6,7 +6,7 @@
 
 body {
   background-image: linear-gradient( hsla(180, 47%, 31%, 1) 0%, hsla(0, 2%, 84%, 1) 100%);
-  color: hsla(0, 0%, 90%, 1);
+  color: hsla(330, 2%, 18%, 1);
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
 }
@@ -61,6 +61,6 @@ body {
 }
 
 .error {
-  color: red;
+  color: hsl(347, 60%, 59%);
   margin-top: 1rem;
 }

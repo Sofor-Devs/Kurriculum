@@ -1,6 +1,8 @@
 import { v } from "convex/values"
-import { query, mutation, action } from "./_generated/server"
+import { query, mutation, action, httpAction } from "./_generated/server"
 import { api } from "./_generated/api"
+import TogetherClient from './../src/models/TogetherClient'
+import {APIKeys} from '../src/components/Keys/keys';
 
 // Write your Convex functions in any file inside this directory (`convex`).
 // See https://docs.convex.dev/functions for more.
@@ -67,4 +69,42 @@ export const fetchRandomIdea = action({
     // Optionally, return a value from your action
     return idea
   },
-})
+});
+
+export const generateCurriculumWithTogether = action({
+  args: {
+    prompt: v.string(),
+    model: v.string(),
+    temperature: v.number(),
+    numCompletions: v.number(),
+    maxTokens: v.number(),
+    topKPerToken: v.number(),
+    stopSequences: v.array(v.string()),
+    echoPrompt: v.boolean(),
+    topP: v.number(),
+  },
+  handler: async (ctx, args) => {
+    const togetherClient = new TogetherClient(APIKeys.togetherAPIKey.toString());
+
+    const request = {
+      model: args.model,
+      prompt: args.prompt,
+      temperature: args.temperature,
+      numCompletions: args.numCompletions,
+      maxTokens: args.maxTokens,
+      topKPerToken: args.topKPerToken,
+      stopSequences: args.stopSequences,
+      echoPrompt: args.echoPrompt,
+      topP: args.topP,
+    };
+    //console.log(request);
+    try {
+      const result = await togetherClient.makeRequest(request);
+      //console.log(result);
+      return result;
+    } catch (error) {
+      console.error('Failed to generate curriculum with Together:', error);
+      throw new Error('Failed to generate curriculum');
+    }
+  },
+});

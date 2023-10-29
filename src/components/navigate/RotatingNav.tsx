@@ -27,6 +27,8 @@ const RotatingNav: React.FC = () => {
         <Link className="link" to="/">
           <li className={rotated ? 'rotated' : ''}>
             <div className="main">
+              <div className="horizontol"></div>
+              <div className="vertical"></div>
             </div>
           </li>
         </Link>

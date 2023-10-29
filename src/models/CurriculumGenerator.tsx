@@ -102,24 +102,28 @@ const CurriculumGenerator = () => {
   return (
     <div>
       <h2>Curriculum Generator</h2>
+      <br/>
       <div>
         <label>
           Timeline:
           <input type="text" value={timeline} onChange={e => setTimeline(e.target.value)} />
         </label>
       </div>
+      <br/>
       <div>
         <label>
           Project Summary:
           <textarea value={projectSummary} onChange={e => setProjectSummary(e.target.value)} />
         </label>
       </div>
+      <br/>
       <div>
         <label>
           Experience Level:
           <input type="text" value={experienceLevel} onChange={e => setExperienceLevel(e.target.value)} />
         </label>
       </div>
+      <br/>
       <div>
         <label>
           Number of Classes per Week:
@@ -131,6 +135,7 @@ const CurriculumGenerator = () => {
           </select>
         </label>
       </div>
+      <br/>
       <div>
       <label>
           Class Days:
@@ -146,7 +151,7 @@ const CurriculumGenerator = () => {
       <button onClick={generateCurriculum}>Generate Curriculum</button>
       {curriculum && <div><h3>Curriculum:</h3><p>{curriculum}</p></div>}
       {keywords.length > 0 && <div><h3>YouTube Keywords:</h3><ul>{keywords.map((keyword, index) => <li key={index}>{keyword}</li>)}</ul></div>}
-      {error && <div style={{ color: 'red' }}>{error}</div>}
+      {error && <div style={{ color: 'hsl(347, 60%, 59%)' }}>{error}</div>}
     </div>
   );
 };

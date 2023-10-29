@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import Modal from "./components/Modal";
-import CurriculumGenerator from "./models/CurriculumGenerator";
+import Modal from "../../components/Modal";
+import CurriculumGenerator from "../../models/CurriculumGenerator";
 import { useQuery } from "convex/react";
-import { api } from "../convex/_generated/api";
-import { Button } from "../src/components/ui/button";
-import Sidebar from "./components/navigate/Sidebar"; // Import Sidebar component
+import { api } from "../../../convex/_generated/api";
+import { Button } from "../../../src/components/ui/button";
+import Sidebar from "../../components/navigate/Sidebar"; // Import Sidebar component
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./App.css";
-import RotatingNav from "../src/components/navigate/RotatingNav";
-import Home from "./pages/Home/home";
-import About from "./pages/About/about";
-import Contact from "./pages/Contact/contact";
+import "./index.css";
+import "../Home/home";
+import RotatingNav from "../../../src/components/navigate/RotatingNav";
+import Home from "../Home/home";
 
-function App() {
+function Curriculum() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const ideas = useQuery(api.myFunctions.listIdeas);
 
@@ -21,13 +20,12 @@ function App() {
 
   return (
     <Router>
-      <div className="app">
+      <div className="Curriculum">
         <Sidebar />
         <main className="container max-w-2xl flex flex-col gap-8">
           <Routes>
-            <Route path="home" element={<Home />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="about" element={<About />} />
+            <Route path="Home" element={<Home />} />
+
             <Route
               path="/"
               element={
@@ -36,7 +34,7 @@ function App() {
                     Curriculum Generator
                   </h1>
 
-                  <Button onClick={openModal}><a href = './pages/Curriculum/curriculum'>Open Curriculum Generator</a></Button>
+                  <Button onClick={openModal}>Open Curriculum Generator</Button>
 
                   <Modal isOpen={isModalOpen} onClose={closeModal}>
                     <CurriculumGenerator closeModal={closeModal} />
@@ -61,4 +59,4 @@ function App() {
   );
 }
 
-export default App;
+export default Curriculum;

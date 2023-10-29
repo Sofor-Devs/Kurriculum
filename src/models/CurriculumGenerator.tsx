@@ -126,7 +126,7 @@ const CurriculumGenerator = () => {
         .split(",")
         .map((keyword) => keyword.trim());
       setKeywords(extractedKeywords);
-
+      const videoLink = searchYouTube(extractedKeywords);
       
       // set the curriculum details in the context
       const setCurriculumDetails = `

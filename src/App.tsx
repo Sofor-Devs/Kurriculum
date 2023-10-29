@@ -11,6 +11,7 @@ import RotatingNav from "../src/components/navigate/RotatingNav";
 import Home from "./pages/Home/home";
 import About from "./pages/About/about";
 import Contact from "./pages/Contact/contact";
+import { CurriculumProvider } from "./components/CurriculumContext/CurriculumContext";
 
 function App() {
   return (
@@ -30,7 +31,6 @@ function AppContent() {
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <Router>
       <div className="app">
         <Sidebar />
         <main className="container max-w-2xl flex flex-col gap-8">
@@ -55,7 +55,7 @@ function AppContent() {
                   </Modal>
 
                   <ul>
-                    {ideas?.map((document, i) => (
+                    {projects?.map((document, i) => (
                       <li key={i}>{document.description}</li>
                     ))}
                   </ul>
@@ -69,7 +69,6 @@ function AppContent() {
           </footer>
         </main>
       </div>
-    </Router>
   );
 }
 

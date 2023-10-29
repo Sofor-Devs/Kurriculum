@@ -12,6 +12,8 @@ import Home from "./pages/Home/home";
 import About from "./pages/About/about";
 import Contact from "./pages/Contact/contact";
 import { CurriculumProvider } from "./components/CurriculumContext/CurriculumContext";
+import CurriculumPage from "./pages/CurriculumPage/CurriculumPage";
+import CourseDashboard from "./pages/CourseDashboard/CourseDashboard";
 
 function App() {
   return (
@@ -38,6 +40,9 @@ function AppContent() {
             <Route path="home" element={<Home />} />
             <Route path="contact" element={<Contact />} />
             <Route path="about" element={<About />} />
+            <Route path="curriculum" element={<CurriculumPage />} />
+            <Route path="/course-dashboard/:projectId" element={<CourseDashboard />} />
+        {/* Add a catch-all route if desired */}
             <Route
               path="/"
               element={

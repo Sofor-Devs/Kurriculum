@@ -13,7 +13,7 @@ import Home from "../Home/home";
 
 function Curriculum() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const ideas = useQuery(api.myFunctions.listIdeas);
+  const projects = useQuery(api.myFunctions.getCurriculum);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -41,7 +41,7 @@ function Curriculum() {
                   </Modal>
 
                   <ul>
-                    {ideas?.map((document, i) => (
+                    {projects?.map((document, i) => (
                       <li key={i}>{document.description}</li>
                     ))}
                   </ul>

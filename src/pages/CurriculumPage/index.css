@@ -1,30 +1,24 @@
-.curriculum-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .session-details {
-    width: 100%;
-    max-width: 800px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 15px;
-    margin-top: 20px;
-    background-color: #fff;  /* Add a background color if needed */
-  }
-  
-  .session-title {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  .session-content {
-    line-height: 1.6;  /* Adjust line height for readability */
-    color: #555;
-  }
-  
-  /* Add additional styles as needed */
-  
+.curriculum-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: transparent;
+}
+
+.course-card {
+  width: calc(33.333% - 20px); /* Divide by 3 and subtract some margin */
+  margin: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}

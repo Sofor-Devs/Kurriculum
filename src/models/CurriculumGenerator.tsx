@@ -3,17 +3,86 @@ import Select, { MultiValue, ActionMeta } from "react-select";
 import axios from "axios";
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { APIKeys } from '../components/Keys/keys';
-import { useCurriculum } from '../components/CurriculumContext/CurriculumContext';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { APIKeys } from "../components/Keys/keys";
 
-
+import "./loading.css"; // Create a loading.css file with your loading bar style
+import { useNavigate } from "react-router-dom";
 const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
 
 interface OptionType {
   value: string;
   label: string;
 }
+interface Curriculum {
+  [week: string]: {
+    title: string;
+    lessons: Lesson[];
+  };
+}
+
+interface Lesson {
+  title: string;
+  topics: string[];
+  resources: string[];
+  keywords: string[];
+}
+
+function parseCurriculum(text: string): Curriculum {
+  const lines = text.split('\n');
+  const curriculum: Curriculum = {};
+  let currentWeek: { title: string; lessons: Lesson[] } | null = null;
+  let currentLesson: Lesson | null = null;
+
+  for (const line of lines) {
+    const trimmedLine = line.trim();
+
+    if (trimmedLine.startsWith('-week')) {
+      const weekTitle = trimmedLine.slice(6).trim();
+      currentWeek = { title: weekTitle, lessons: [] };
+      curriculum[`week${Object.keys(curriculum).length + 1}`] = currentWeek;
+    } else if (trimmedLine.startsWith('-lesson')) {
+      const lessonTitle = trimmedLine.slice(7).trim();
+      currentLesson = { title: lessonTitle, topics: [], resources: [], keywords: [] };
+      currentWeek?.lessons.push(currentLesson);
+    } else if (trimmedLine.startsWith('-topics')) {
+      const topics = trimmedLine.slice(7).trim().split(', ');
+      if (currentLesson) currentLesson.topics = topics;
+    } else if (trimmedLine.startsWith('-resources')) {
+      const resources = trimmedLine.slice(10).trim().split(', ');
+      if (currentLesson) currentLesson.resources = resources;
+    } else if (trimmedLine.startsWith('-search keywords')) {
+      const keywords = trimmedLine.slice(15).trim().split(', ');
+      if (currentLesson) currentLesson.keywords = keywords;
+    }
+  }
+
+  return curriculum;
+}
+const searchYouTube = async (keywords: string[]) => {
+  const query = keywords.join(' ');
+  try {
+    const response = await axios.get(YOUTUBE_SEARCH_URL, {
+      params: {
+        part: 'snippet',
+        maxResults: 1,
+        q: query,
+        type: 'video',
+        key: APIKeys.googleAPIKey,
+      },
+    });
+
+    if (response.data.items.length > 0) {
+      const videoId = response.data.items[0].id.videoId;
+      const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+      console.log(`Top video for keywords "${query}": ${videoUrl}`);
+      // You can set the video URL to the state or do something else with it
+    } else {
+      console.log('No videos found for the given keywords');
+    }
+  } catch (error) {
+    console.error('Failed to fetch videos from YouTube', error);
+  }
+};
 
 const CurriculumGenerator = () => {
   const [projectName, setName] = useState("");
@@ -26,7 +95,7 @@ const CurriculumGenerator = () => {
   const [keywords, setKeywords] = useState(["", "", "", "", ""]); //THIS MIGHT NEED SOME CHANGE
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false); // State for loading indicator
-
+  const [youtubeVideoUrl, setYoutubeVideoUrl] = useState<string | null>(null);
 
   const classDaysOptions = [
     { value: "Monday", label: "Monday" },
@@ -50,7 +119,8 @@ const CurriculumGenerator = () => {
       setClassDays(selectedDays);
     }
   };
-
+  
+  const navigate = useNavigate();
   const saveCurriculum = useMutation(api.myFunctions.saveCurriculum);
 
   const generateCurriculum = async () => {
@@ -69,19 +139,20 @@ const CurriculumGenerator = () => {
       For the resources, return keywords for each session that can be searched on YouTube using the YouTube API.
       Format the keywords like this: "Keywords for YouTube: keyword1, keyword2, keyword3".
       return the result in this format as a JSON FILE:
-      Curriculum: title of the project 
-       -week 1: title
-       -lesson 1: 
-        -topics
-        -resources
-        -search keywords
-       -lesson 2:
-        -topics
-        -resources
-        -search keywords
-        .
-        .(continue the number of lessons based on the number of classes per week)
-        .
+
+       title of the project 
+        -week 1: title
+        -lesson 1: 
+          -topics
+          -resources
+          -search keywords
+        -lesson 2:
+          -topics
+          -resources
+          -search keywords
+          .
+          .(continue the number of lessons based on the number of classes per week)
+          .
         -week 2: title
         -topics
         -resources
@@ -114,9 +185,9 @@ const CurriculumGenerator = () => {
     try {
       const response = await axios.request(options);
       const generatedText: string = response.data.output.choices[0].text;
-      const curriculumObject = parseCurriculum(generatedText);
-      setCurriculum(JSON.stringify(curriculumObject, null, 2));
       console.log(generatedText);
+      setCurriculum(generatedText);
+
       const keywordsLine =
         generatedText
           .split("\n")
@@ -126,101 +197,20 @@ const CurriculumGenerator = () => {
         .split(",")
         .map((keyword) => keyword.trim());
       setKeywords(extractedKeywords);
-      const videoLink = searchYouTube(extractedKeywords);
-      
-      // set the curriculum details in the context
-      const setCurriculumDetails = `
-        Timeline: ${timeline}
-        Project Summary: ${projectSummary}
-        Experience Level: ${experienceLevel}
-        Number of Classes per Week: ${numClassesPerWeek}
-        Class Days: ${classDays.join(', ')}
-        Curriculum: ${curriculum}
-        Extracted Keywords: ${extractedKeywords.join(', ')}
-      `;
-
-      
-      await saveCurriculum({ description: setCurriculumDetails});
-      
+      searchYouTube(keywords);
+      await saveCurriculum({ description: generatedText });
     } catch (error) {
       setError("Failed to generate curriculum");
     }finally{
       setIsLoading(false); // Set loading indicator to false
-
+      if(!isLoading){
+        navigate('/curriculum');
+      }
+        
       console.error(error);
     }
   };
 
-  interface Curriculum {
-    [week: string]: {
-      title: string;
-      lessons: Lesson[];
-    };
-  }
-  
-  interface Lesson {
-    title: string;
-    topics: string[];
-    resources: string[];
-    keywords: string[];
-  }
-  
-  function parseCurriculum(text: string): Curriculum {
-    const lines = text.split('\n');
-    const curriculum: Curriculum = {};
-    let currentWeek: { title: string; lessons: Lesson[] } | null = null;
-    let currentLesson: Lesson | null = null;
-  
-    for (const line of lines) {
-      const trimmedLine = line.trim();
-  
-      if (trimmedLine.startsWith('-week')) {
-        const weekTitle = trimmedLine.slice(6).trim();
-        currentWeek = { title: weekTitle, lessons: [] };
-        curriculum[`week${Object.keys(curriculum).length + 1}`] = currentWeek;
-      } else if (trimmedLine.startsWith('-lesson')) {
-        const lessonTitle = trimmedLine.slice(7).trim();
-        currentLesson = { title: lessonTitle, topics: [], resources: [], keywords: [] };
-        currentWeek?.lessons.push(currentLesson);
-      } else if (trimmedLine.startsWith('-topics')) {
-        const topics = trimmedLine.slice(7).trim().split(', ');
-        if (currentLesson) currentLesson.topics = topics;
-      } else if (trimmedLine.startsWith('-resources')) {
-        const resources = trimmedLine.slice(10).trim().split(', ');
-        if (currentLesson) currentLesson.resources = resources;
-      } else if (trimmedLine.startsWith('-search keywords')) {
-        const keywords = trimmedLine.slice(15).trim().split(', ');
-        if (currentLesson) currentLesson.keywords = keywords;
-      }
-    }
-  
-    return curriculum;
-  }
-  const searchYouTube = async (keywords: string[]) => {
-    const query = keywords.join(' ');
-    try {
-      const response = await axios.get(YOUTUBE_SEARCH_URL, {
-        params: {
-          part: 'snippet',
-          maxResults: 1,
-          q: query,
-          type: 'video',
-          key: APIKeys.googleAPIKey,
-        },
-      });
-
-      if (response.data.items.length > 0) {
-        const videoId = response.data.items[0].id.videoId;
-        const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
-        console.log(`Top video for keywords "${query}": ${videoUrl}`);
-        // You can set the video URL to the state or do something else with it
-      } else {
-        console.log('No videos found for the given keywords');
-      }
-    } catch (error) {
-      console.error('Failed to fetch videos from YouTube', error);
-    }
-  };
   return (
     <div>
       <h2>Curriculum Generator</h2>
@@ -303,6 +293,14 @@ const CurriculumGenerator = () => {
         <div>
           <h3>Curriculum:</h3>
           <p>{curriculum}</p>
+        </div>
+      )}
+      {youtubeVideoUrl && (
+        <div>
+          <h3>Top YouTube Video:</h3>
+          <a href={youtubeVideoUrl} target="_blank" rel="noopener noreferrer">
+            Watch Video
+          </a>
         </div>
       )}
       {keywords.length > 0 && (

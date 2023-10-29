@@ -1,0 +1,26 @@
+.course-dashboard {
+    display: flex;
+  }
+  
+  .course-plan {
+    width: 30%;
+    padding: 10px;
+  }
+  
+  .video-display {
+    width: 70%;
+    padding: 10px;
+  }
+  
+  .lesson {
+    cursor: pointer;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .lesson:hover {
+    background-color: #f0f0f0;
+  }
+  

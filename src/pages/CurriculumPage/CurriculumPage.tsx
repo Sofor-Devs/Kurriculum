@@ -8,10 +8,14 @@ import { api } from '../../../convex/_generated/api';
 const CurriculumPage = () => {
   const navigate = useNavigate();
   const curriculum = useQuery(api.myFunctions.getCurriculum); // Fetch curriculum data from Convex
-
   console.log(curriculum);
-  const goToCourseDashboard = (courseId: number) => {
-    navigate(`/course-dashboard/${courseId}`);
+  const parseTitle = (text) => {
+    const titlematch = text.match(/Title: (.+)/);
+    return titlematch ? titlematch[1] : 'Unnamed Project';
+  } 
+  console.log(curriculum);
+  const goToCourseDashboard = (courseId, projectName) => {
+    navigate(`/course-dashboard/${courseId}`, {state: {projectName}});
   };
 
   if (!curriculum) {
@@ -24,9 +28,9 @@ return (
       <div
         key={course._id || course.id} // Fall back to 'id' if '_id' is not available
         className="course-card"
-        onClick={() => goToCourseDashboard(course._id || course.id)}
+        onClick={() => goToCourseDashboard(course._id || course.id, parseTitle(course.description))}
       >
-        {course.projectName || 'Unnamed Course'} {/* Provide a default name if projectName is not available */}
+        {parseTitle(course.description)} {/* Provide a default name if projectName is not available */}
       </div>
     ))}
   </div>

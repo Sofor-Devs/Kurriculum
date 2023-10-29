@@ -12,6 +12,8 @@ import Home from "./pages/Home/home";
 import About from "./pages/About/about";
 import Contact from "./pages/Contact/contact";
 import Curriculum from "./pages/Curriculum/curriculum";
+import CurriculumPage from "./pages/CurriculumPage/CurriculumPage";
+import CourseDashboard from "./pages/CourseDashboard/CourseDashboard";
 
 
 function App() {
@@ -30,7 +32,8 @@ function App() {
             <Route path="home" element={<Home />} />
             <Route path="contact" element={<Contact />} />
             <Route path="about" element={<About />} />
-            <Route path="curriculum" element={<Curriculum />} />
+            <Route path="curriculum" element={<CurriculumPage />} />
+            <Route path="course-dashboard/:courseid" element={<CourseDashboard />} />
             <Route
               path="/"
               element={

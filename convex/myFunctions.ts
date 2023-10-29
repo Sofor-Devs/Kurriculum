@@ -14,6 +14,14 @@ export const getCurriculum = query({
   },
 });
 
+export const getCourse = query({
+  args: {courseID: v.id("projects")},
+  handler: async (ctx, args) => {
+    const courses = await ctx.db.query("projects").collect();
+    return courses.find(course => course._id === args.courseID);
+},
+});
+
 export const listIdeas = query({
   // Validators for arguments.
   args: {},

@@ -1,4 +1,5 @@
 import React from 'react';
+import './../../pages/CourseDashboard/index.css';
 
 const VideoDisplay = ({ keywords }) => {
   const generateVideoSrc = (keywords) => {

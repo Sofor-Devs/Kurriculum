@@ -1,4 +1,5 @@
 import React from 'react';
+import './../../pages/CourseDashboard/index.css';
 
 const CoursePlan = ({ weeks, onSelectLesson }) => {
   return (

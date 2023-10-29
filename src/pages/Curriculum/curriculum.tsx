@@ -19,9 +19,8 @@ function Curriculum() {
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <Router>
       <div className="Curriculum">
-        <Sidebar />
+    
         <main className="container max-w-2xl flex flex-col gap-8">
           <Routes>
             <Route path="Home" element={<Home />} />
@@ -55,7 +54,6 @@ function Curriculum() {
           </footer>
         </main>
       </div>
-    </Router>
   );
 }
 

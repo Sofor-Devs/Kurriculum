@@ -201,7 +201,7 @@ const CurriculumGenerator = () => {
       await saveCurriculum({ description: generatedText });
     } catch (error) {
       setError("Failed to generate curriculum");
-    }finally{
+    } finally {
       setIsLoading(false); // Set loading indicator to false
       if(!isLoading){
         navigate('/curriculum');

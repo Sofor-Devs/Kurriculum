@@ -14,6 +14,7 @@ import Contact from "./pages/Contact/contact";
 import { CurriculumProvider } from "./components/CurriculumContext/CurriculumContext";
 import CurriculumPage from "./pages/CurriculumPage/CurriculumPage";
 import CourseDashboard from "./pages/CourseDashboard/CourseDashboard";
+import Curriculum from "./pages/Curriculum/curriculum";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function AppContent() {
             <Route path="curriculum" element={<CurriculumPage />} />
             <Route path="/course-dashboard/:projectId" element={<CourseDashboard />} />
         {/* Add a catch-all route if desired */}
+            <Route path="curriculum" element={<Curriculum />} />
             <Route
               path="/"
               element={

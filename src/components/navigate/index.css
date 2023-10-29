@@ -28,20 +28,20 @@ h2 {
   font-size: 24px;
 }
 body {
-  padding: 40px 0;
+ 	padding: 40px 0;
 	background: rgb(171, 247, 230);
-  color: white;
-  max-width:640px;
+ 	color: white;
+ 	max-width:640px;
 	font-family: 'Montserrat', sans-serif;
 	font-size: 14px;
-  line-height:1.4;
+ 	line-height:1.4;
 }
 
 nav {
-  float: left;
+  	float: left;
 	position: relative;
 	top: 0;
-  left: 0;
+  	left: 0;
 	background: transparent;
 }
 
@@ -51,24 +51,24 @@ nav ul {
 
 nav ul li {
 	position: relative;
-  width: 70px;
-  height: 80px;
-  cursor: pointer;
+  	width: 70px;
+  	height: 80px;
+  	cursor: pointer;
 	background:hsla(330, 2%, 18%, 1);
 	text-transform: uppercase;
 	transition:all .4s ease-out;
 }
 
 nav ul li:after {
-  content: "";
+  	content: "";
 	position: absolute;
 	background:hsla(0, 0%, 90%, 1);
 	color: hsla(180, 47%, 31%, 1);
 	top:0;
 	left: 70px;
 	width: 70px; 
-  opacity:.5;
-  transform: perspective(400px) rotateY(90deg);
+  	opacity:.5;
+  	transform: perspective(400px) rotateY(90deg);
 	transform-origin: 0 100%;
 	transition:all .4s ease-out;
 }
@@ -88,11 +88,15 @@ nav ul a:nth-child(2) li:after {
 	line-height: 80px;
 }
 nav ul a:nth-child(3) li:after { 
+	content: "History";
+	line-height: 80px;
+}
+nav ul a:nth-child(4) li:after { 
 	content: "About";
 	line-height: 80px;
 }
 
-nav ul a:nth-child(4) li:after { 
+nav ul a:nth-child(5) li:after { 
 	content: "Contact";
 	line-height: 80px;
 }
@@ -115,9 +119,11 @@ nav ul li > div {
 }
 
 .roof {
+	position: absolute; 
 	width: 0;
 	height: 0;
-	top:0px;
+	top:12px;
+	left: 16px;
 	border-style: solid;
 	border-width: 0 21px 15px 21px;
 	border-color: transparent transparent #ffffff transparent;
@@ -126,15 +132,14 @@ nav ul li > div {
 .roof-edge {
 	position: absolute;
 	z-index: 20;
-	left: 18px;
-	top: 27px;
+	left: -17px;
+	top: 0px;
 	width: 0;
 	height: 0;
 	border-style: solid;
 	border-width: 0 17px 12px 17px;
 	border-color: transparent transparent hsla(180, 47%, 31%, 1) transparent;
 }
-/*white triangle over red triangle*/
 .roof-edge:after {
 	position: absolute;
 	left: -14.5px;
@@ -169,8 +174,8 @@ nav ul li > div {
 
 .paper {
 	position: relative;
-  top: -5px;
-  left: -2px;
+  	top: -5px;
+  	left: -2px;
 	height:32px;
 	width: 29px;
 	background: white;
@@ -203,7 +208,46 @@ nav ul li > div {
 	width: 14px;
 	box-shadow: 0 0 0 1px hsla(180, 47%, 31%, 1);
 }
+.horizontol {
+	position: absolute;
+	top: 35px;
+	left: 20px;
+	width: 30px;
+	height: 11px;
+	background: aliceblue;
+}
 
+.horizontol:after {
+	position: absolute;
+	/* top: 4px;
+	left: 3px;
+	width: 14px; */
+}
+
+.vertical {
+	position: absolute;
+	top: 25px;
+	left: 30px;
+	width: 11px;
+	height: 30px;
+	background: aliceblue;
+}
+
+.vertical:after {
+	position: absolute;
+	top: 4px;
+	left: 3px;
+	width: 14px;
+}
+.circle {
+	position: absolute;
+	top: 60px;
+	left: 30px;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: aliceblue;
+}
 .lines:nth-child(2) {
 	position: absolute;
 	top: 40px;
@@ -235,8 +279,8 @@ nav ul li > div {
 	position: relative;
 	width: 32px;
 	height: 18px;
-  left: 0px;
-  top: 0px;
+  	left: 0px;
+  	top: 0px;
 	background: white;
 }
 
@@ -261,6 +305,7 @@ nav ul li > div {
 	height: 0;
 	border-style: solid;
 	border-width: 0 16px 9px 16px;
-	border-color: transparent transparent white transparent;
+	border-color: transparent transparent transparent transparent;
+	
 }
 

@@ -88,7 +88,7 @@ nav ul a:nth-child(2) li:after {
 	line-height: 80px;
 }
 nav ul a:nth-child(3) li:after { 
-	content: "About";
+	content: "History";
 	line-height: 80px;
 }
 
@@ -115,9 +115,11 @@ nav ul li > div {
 }
 
 .roof {
+	position: absolute; 
 	width: 0;
 	height: 0;
-	top:0px;
+	top:12px;
+	left: 16px;
 	border-style: solid;
 	border-width: 0 21px 15px 21px;
 	border-color: transparent transparent #ffffff transparent;
@@ -126,15 +128,14 @@ nav ul li > div {
 .roof-edge {
 	position: absolute;
 	z-index: 20;
-	left: 18px;
-	top: 27px;
+	left: -17px;
+	top: 0px;
 	width: 0;
 	height: 0;
 	border-style: solid;
 	border-width: 0 17px 12px 17px;
 	border-color: transparent transparent hsla(180, 47%, 31%, 1) transparent;
 }
-/*white triangle over red triangle*/
 .roof-edge:after {
 	position: absolute;
 	left: -14.5px;
@@ -266,8 +267,8 @@ nav ul li > div {
 	position: relative;
 	width: 32px;
 	height: 18px;
-  left: 0px;
-  top: 0px;
+  	left: 0px;
+  	top: 0px;
 	background: white;
 }
 
@@ -292,6 +293,7 @@ nav ul li > div {
 	height: 0;
 	border-style: solid;
 	border-width: 0 16px 9px 16px;
-	border-color: transparent transparent white transparent;
+	border-color: transparent transparent transparent transparent;
+	
 }
 

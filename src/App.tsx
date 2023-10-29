@@ -11,6 +11,8 @@ import RotatingNav from "../src/components/navigate/RotatingNav";
 import Home from "./pages/Home/home";
 import About from "./pages/About/about";
 import Contact from "./pages/Contact/contact";
+import Curriculum from "./pages/Curriculum/curriculum";
+
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,7 +29,8 @@ function App() {
           <Routes>
             <Route path="home" element={<Home />} />
             <Route path="contact" element={<Contact />} />
-            <Route path="about" element={<About />} />
+            {/* <Route path="about" element={<About />} /> */}
+            <Route path="curriculum" element={<Curriculum />} />
             <Route
               path="/"
               element={

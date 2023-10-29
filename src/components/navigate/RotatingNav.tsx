@@ -32,8 +32,9 @@ const RotatingNav: React.FC = () => {
             </div>
           </li>
         </Link>
+  
 
-        <Link className="link" to="/about">
+        <Link className="link" to="/curriculum">
           <li className={rotated ? 'rotated' : ''}>
             <div className="work-icon">
               <div className="paper"></div>

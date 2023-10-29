@@ -24,7 +24,6 @@ const CurriculumGenerator = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false); // State for loading indicator
 
-
   const classDaysOptions = [
     { value: "Monday", label: "Monday" },
     { value: "Tuesday", label: "Tuesday" },
@@ -127,7 +126,7 @@ const CurriculumGenerator = () => {
       await saveCurriculum({ description: generatedText });
     } catch (error) {
       setError("Failed to generate curriculum");
-    }finally{
+    } finally {
       setIsLoading(false); // Set loading indicator to false
 
       console.error(error);

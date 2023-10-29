@@ -1,0 +1,30 @@
+.curriculum-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .session-details {
+    width: 100%;
+    max-width: 800px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: #fff;  /* Add a background color if needed */
+  }
+  
+  .session-title {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .session-content {
+    line-height: 1.6;  /* Adjust line height for readability */
+    color: #555;
+  }
+  
+  /* Add additional styles as needed */
+  

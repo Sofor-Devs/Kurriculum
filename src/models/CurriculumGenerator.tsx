@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { APIKeys } from '../components/Keys/keys';
+import { useCurriculum } from '../components/CurriculumContext/CurriculumContext';
+import { useNavigate } from 'react-router-dom';
 
 interface OptionType {
   value: string;
@@ -19,6 +21,7 @@ const CurriculumGenerator = () => {
   const [curriculum, setCurriculum] = useState('');
   const [keywords, setKeywords] = useState(['','','','','']); //THIS MIGHT NEED SOME CHANGE
   const [error, setError] = useState('');
+  //const { setCurriculumDetails } = useCurriculum();
 
    const classDaysOptions = [
     { value: 'Monday', label: 'Monday' },
@@ -50,18 +53,33 @@ const CurriculumGenerator = () => {
   
   
   
+  const navigate = useNavigate();
 
   const generateCurriculum = async () => {
     const prompt = `
       Generate a detailed curriculum plan based on the following details:
-      - Timeline: ${timeline}
-      - Project Summary: ${projectSummary}
-      - Experience Level: ${experienceLevel}
-      - Number of Classes per Week: ${numClassesPerWeek}
-      - Class Days: ${classDays.join(', ')}
+      - Timeline: ${timeline} (the lenth of the course)
+      - Project Summary: ${projectSummary} (details of what the project is and what it includes)
+      - Experience Level: ${experienceLevel} (student's experience level)
+      - Number of Classes per Week: ${numClassesPerWeek} (Number of meetings per week)
+      - Class Days: ${classDays.join(', ')} (the days the class is held)
       Provide a breakdown of topics, sessions, and resources for material preparation.
       For the resources, return keywords for each session that can be searched on YouTube using the YouTube API.
       Format the keywords like this: "Keywords for YouTube: keyword1, keyword2, keyword3".
+      return the result in this format:
+      Curriculum:
+       -week 1: title
+        -topics
+        -resources
+        -search keywords
+       -week 2: title
+        -topics
+        -resources
+        -search keywords
+        .
+        .
+        .
+
     `;
 
     const options = {
@@ -86,13 +104,26 @@ const CurriculumGenerator = () => {
       const response = await axios.request(options);
       const generatedText: string = response.data.output.choices[0].text;
       console.log(generatedText);
-      setCurriculum(generatedText);
-
       const keywordsLine = generatedText.split('\n').find(line => line.startsWith('Keywords for YouTube:')) || '';
       const extractedKeywords: string[] = keywordsLine.substring(22).split(',').map(keyword => keyword.trim());
       setKeywords(extractedKeywords);
 
-      await saveCurriculum({ description: generatedText });
+      
+      // set the curriculum details in the context
+      const setCurriculumDetails = `
+        Timeline: ${timeline}
+        Project Summary: ${projectSummary}
+        Experience Level: ${experienceLevel}
+        Number of Classes per Week: ${numClassesPerWeek}
+        Class Days: ${classDays.join(', ')}
+        Curriculum: ${curriculum}
+        Extracted Keywords: ${extractedKeywords.join(', ')}
+      `;
+
+      
+      await saveCurriculum({ description: setCurriculumDetails});
+      navigate('/curriculum');
+      
     } catch (error) {
       setError('Failed to generate curriculum');
       console.error(error);

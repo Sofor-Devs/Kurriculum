@@ -6,6 +6,14 @@ import { api } from "./_generated/api"
 // See https://docs.convex.dev/functions for more.
 
 // You can read data from the database via a query function:
+
+export const getCurriculum = query({
+  args: {},
+  handler: async (ctx, args) => {
+    return await ctx.db.query("projects").collect();
+  },
+});
+
 export const listIdeas = query({
   // Validators for arguments.
   args: {},
@@ -32,7 +40,7 @@ export const saveCurriculum = mutation({
     // See https://docs.convex.dev/database/writing-data.
 
     // Optionally, capture the ID of the newly created document
-    const id = await ctx.db.insert("ideas", args)
+    const id = await ctx.db.insert("projects", args)
 
     // Optionally, return a value from your mutation.
     return id

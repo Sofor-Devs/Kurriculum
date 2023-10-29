@@ -11,29 +11,18 @@ import RotatingNav from "../src/components/navigate/RotatingNav";
 import Home from "./pages/Home/home";
 import About from "./pages/About/about";
 import Contact from "./pages/Contact/contact";
-import { CurriculumProvider } from "./components/CurriculumContext/CurriculumContext";
-import CurriculumPage from "./pages/CurriculumPage/CurriculumPage";
-import CourseDashboard from "./pages/CourseDashboard/CourseDashboard";
 import Curriculum from "./pages/Curriculum/curriculum";
 
-function App() {
-  return (
-    <Router>
-      <CurriculumProvider>
-        <AppContent />
-      </CurriculumProvider>
-    </Router>
-  );
-}
 
-function AppContent() {
+function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const projects = useQuery(api.myFunctions.getCurriculum);
+  const ideas = useQuery(api.myFunctions.listIdeas);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   return (
+    <Router>
       <div className="app">
         <Sidebar />
         <main className="container max-w-2xl flex flex-col gap-8">
@@ -41,9 +30,6 @@ function AppContent() {
             <Route path="home" element={<Home />} />
             <Route path="contact" element={<Contact />} />
             <Route path="about" element={<About />} />
-            <Route path="curriculum" element={<CurriculumPage />} />
-            <Route path="/course-dashboard/:projectId" element={<CourseDashboard />} />
-        {/* Add a catch-all route if desired */}
             <Route path="curriculum" element={<Curriculum />} />
             <Route
               path="/"
@@ -62,7 +48,7 @@ function AppContent() {
                   </Modal>
 
                   <ul>
-                    {projects?.map((document, i) => (
+                    {ideas?.map((document, i) => (
                       <li key={i}>{document.description}</li>
                     ))}
                   </ul>
@@ -76,6 +62,7 @@ function AppContent() {
           </footer>
         </main>
       </div>
+    </Router>
   );
 }
 

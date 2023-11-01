@@ -5,10 +5,10 @@ import VideoDisplay from '../../components/videoDisplay/VideoDisplay';
 import { api } from '../../../convex/_generated/api';
 import { useParams } from 'react-router-dom';
 import { Id } from '../../../convex/_generated/dataModel';
+import './index.css';
 
 interface Topic {
   title: string;
-  description: string;
 }
 
 interface Lesson {
@@ -21,11 +21,14 @@ interface Lesson {
 interface Week {
   title: string;
   lessons: Lesson[];
+  hours: number;
+  notes?: string;
 }
 
 interface Course {
   title: string;
   weeks: Week[];
+  additionalInstructions?: string;
 }
 
 const parseCurriculum = (curriculumData: any): Course | null => {
@@ -44,14 +47,14 @@ const parseCurriculum = (curriculumData: any): Course | null => {
         title: week.title,
         lessons: week.lessons.map((lesson: any) => ({
           title: lesson.title,
-          topics: lesson.topics.map((topic: string) => ({
-            title: topic?.split(':')[0]?.trim(),
-            description: topic?.split(':')[1]?.trim(),
-          })),
+          topics: lesson.topics.map((topic: string) => ({ title: topic })),
           resources: lesson.resources,
           searchKeywords: lesson.search_keywords,
         })),
+        hours: week.hours,
+        notes: week.notes,
       })),
+      additionalInstructions: courseData.additional_instructions,
     };
 
     return course;
@@ -60,6 +63,7 @@ const parseCurriculum = (curriculumData: any): Course | null => {
     return null;
   }
 };
+
 
 const CourseDashboard: React.FC = () => {
   const {courseid} = useParams();

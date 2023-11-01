@@ -1,38 +1,45 @@
 .course-dashboard {
-    display: flex;
-  }
-  
-  .course-plan {
-    width: 30%;
-    padding: 10px;
-  }
-  
-  .video-container {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-    height: 0;
-    overflow: hidden;
-  }
-  
-  .video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
-  
-  .lesson {
-    cursor: pointer;
-    margin-bottom: 10px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .lesson:hover {
-    background-color: #f0f0f0;
-  }
-  
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: start;
+}
+
+.course-dashboard h1{
+  text-align: center;
+  margin-bottom: 20px; /* Add some spacing below the title */
+}
+
+.course-plan, .video-display {
+  display: flex;
+  flex-direction: row;
+  flex: 1; /* Take equal widths */
+}
+
+.course-plan {
+  flex: 1; /* Stack course weeks and lessons vertically */
+  padding: 10px;
+  border-right: 1px solid #ccc; /* Add a border to separate from video */
+   /* Add some spacing to the right */
+}
+
+.video-display {
+  flex: 3; /* Take 2 times more width than .course-plan */
+  padding: 10px;
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  /* padding-bottom: 56.25%; 16:9 Aspect Ratio */
+  overflow: hidden;
+}
+
+.lesson {
+  cursor: pointer;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.lesson:hover {
+  background-color: #f0f0f0;
+}

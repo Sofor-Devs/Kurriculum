@@ -9,7 +9,7 @@ const CoursePlan = ({ weeks, onSelectLesson }) => {
           <h3>{week.title}</h3>
           {week.lessons.map((lesson, lessonIndex) => (
             <div key={lessonIndex} className="lesson" onClick={() => onSelectLesson(lesson)}>
-              Lesson {lessonIndex + 1}: {lesson.topics.join(', ')}
+              {lesson.title}
             </div>
           ))}
         </div>

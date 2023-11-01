@@ -138,31 +138,39 @@ const CurriculumGenerator = () => {
       distruibute the material based on the number of hours that is being spent in the subject between the number of classes there is in one week.
       For the resources, return keywords for each session that can be searched on YouTube using the YouTube API.
       Format the keywords like this: "Keywords for YouTube: keyword1, keyword2, keyword3".
-      return the result in this format as a JSON FILE:
-
-       title of the project 
-        -week 1: title
-        -lesson 1: 
-          -topics
-          -resources
-          -search keywords
-        -lesson 2:
-          -topics
-          -resources
-          -search keywords
-          .
-          .(continue the number of lessons based on the number of classes per week)
-          .
-        -week 2: title
-        -topics
-        -resources
-        -search keywords
-        .
-        .
-        .(continue the number of weeks based on the inital given timeline based on the number of classes per week)
-
+      return the result as text in a JSON FILE just like the format below. This is very crucial to the application
+      "notes": "Adjust the number of lessons and topics based on the size of the timeline and the number of classes scheduled for this week."
+      "additional_instructions": "Please customize this template to fit the specific timeline of your course and the number of lessons or classes you plan to conduct each week. Add or remove lessons, topics, and resources as necessary to provide a comprehensive and balanced learning experience."
+      {
+        "title": "",
+        "weeks": [
+          {
+            "title": "",
+            "lessons": [
+              {
+                "title": "",
+                "topics": [],
+                "resources": [],
+                "search_keywords": []
+              },
+              {
+                "title": "",
+                "topics": [],
+                "resources": [],
+                "search_keywords": []
+              }
+              // Add or remove lessons as needed
+            ],
+            "hours": 0,
+            
+          }
+        ],
+        
+      }
+      
     [/INST]
     `;
+    
 
     const options = {
       method: "POST",

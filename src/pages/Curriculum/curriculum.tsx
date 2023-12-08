@@ -21,7 +21,7 @@ function Curriculum() {
   return (
       <div className="Curriculum">
     
-        <main className="container max-w-2xl flex flex-col gap-8">
+        <main className="container">
           <Routes>
             <Route path="Home" element={<Home />} />
 
@@ -29,7 +29,7 @@ function Curriculum() {
               path="/"
               element={
                 <>
-                  <h1 className="text-3xl font-extrabold mt-8 text-center">
+                  <h1 className="generator">
                     Curriculum Generator
                   </h1>
 

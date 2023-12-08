@@ -3,16 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'convex/react';
 import './index.css';
 import { api } from '../../../convex/_generated/api';
+import { Course, parseTitle } from '../../models/ParseCurriculum';
 
 
 const CurriculumPage = () => {
   const navigate = useNavigate();
   const curriculum = useQuery(api.myFunctions.getCurriculum); // Fetch curriculum data from Convex
   console.log(curriculum);
-  const parseTitle = (text) => {
-    const titlematch = text.match(/Title: (.+)/);
-    return titlematch ? titlematch[1] : 'Unnamed Project';
-  } 
+
   console.log(curriculum);
   const goToCourseDashboard = (courseId, projectName) => {
     navigate(`/course-dashboard/${courseId}`, {state: {projectName}});
@@ -30,7 +28,7 @@ return (
         className="course-card"
         onClick={() => goToCourseDashboard(course._id || course.id, parseTitle(course.description))}
       >
-        {parseTitle(course.description)} {/* Provide a default name if projectName is not available */}
+        {parseTitle(course)} {/* Provide a default name if projectName is not available */}
       </div>
     ))}
   </div>

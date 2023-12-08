@@ -7,8 +7,11 @@ import { APIKeys } from "../components/Keys/keys";
 
 import "./loading.css"; // Create a loading.css file with your loading bar style
 import { useNavigate } from "react-router-dom";
+
+import OpenAI from "openai";
 const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
 
+const openai = new OpenAI();
 interface OptionType {
   value: string;
   label: string;
